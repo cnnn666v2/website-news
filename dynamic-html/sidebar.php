@@ -1,4 +1,4 @@
-<nav id="sidebar" class="vh-full bg-slate-700 basis-2/12 text-gray-300 hidden md:block sticky mt-0">
+<nav id="sidebar" class="h-full bg-slate-700 basis-2/12 text-gray-300 hidden md:block sticky mt-0">
     <div class="flex flex-col gap-2 m-3">
         <h1 class="text-xl text-white uppercase font-semibold">Trending</h1>
         <a class="hover:text-white hover:bg-slate-500 px-4 py-2 rounded-xl text-basic transition-all ease-in-out" href="#">#Żukowska</a>
