@@ -1,4 +1,4 @@
-<nav id="sidebar" class="h-full bg-slate-700 basis-2/12 text-gray-300 hidden md:block sticky mt-0">
+<nav id="sidebar" class="bg-slate-700 basis-2/12 text-gray-300 hidden md:flex md:flex-col">
     <div class="flex flex-col gap-2 m-3">
         <h1 class="text-xl text-white uppercase font-semibold">Trending</h1>
         <a class="hover:text-white hover:bg-slate-500 px-4 py-2 rounded-xl text-basic transition-all ease-in-out" href="#">#Żukowska</a>
@@ -17,7 +17,7 @@
         <a class="hover:text-white hover:bg-slate-500 px-4 py-2 rounded-xl text-basic transition-all ease-in-out" href="#">SSD's</a>
         <a class="hover:text-white hover:bg-slate-500 px-4 py-2 rounded-xl text-basic transition-all ease-in-out" href="#">Other('s)</a>
     </div>
-    <hr>
+    <hr class="mt-auto">
 
     <div class="flex flex-col gap-1 m-3">
         <a class="group hover:text-white hover:bg-slate-500 px-4 py-2 rounded-xl text-basic transition-all ease-in-out" href="#">You<span class="group-hover:bg-red-400 rounded-md group-hover:p-1 group-hover:font-bold transition-all ease-in-out">Tube</span></a>

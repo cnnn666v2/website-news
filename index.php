@@ -34,8 +34,8 @@ if ($result->num_rows > 0) {
             <?php include('dynamic-html/sidebar.php'); ?>
 
             <div id="content" class="flex flex-col md:basis-10/12">
-                <div id="articles" class="basis-full m-5 grid grid-cols-1 grid-rows-6 md:grid-cols-3 md:grid-rows-4 gap-4 text-white">
-                    <div class="group bg-purple-950 rounded-xl flex flex-col h-72 md:h-auto bg-[url('https://picsum.photos/400/200')] bg-cover relative">
+                <div id="articles" class="basis-auto m-5 grid grid-cols-1 grid-rows-6 md:grid-cols-3 md:grid-rows-4 gap-4 text-white">
+                    <div class="group bg-purple-950 rounded-xl flex flex-col h-72 md:h-48 bg-[url('https://picsum.photos/400/200')] bg-cover relative">
                         <div class="mt-auto p-2 flex flex-col bg-black bg-opacity-50 group-hover:opacity-25 transition-all ease-in-out rounded-bl-xl rounded-br-xl">
                             <h1 id="AT-1" class="text-xl">Article Title</h1>
                             <h4 id="AD-1">This is A</h4>
