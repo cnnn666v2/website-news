@@ -1,16 +1,25 @@
 <?php
-include('technicalphp/connect.php');
+session_start();
+require('technicalphp/db.php');
 
-$aTitle = [];
-$aDesc = [];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['uname'];
+    $password = $_POST['pass'];
 
-$sql = "SELECT title, description FROM articles ORDER BY id DESC LIMIT 10";
-$result = $conn->query($sql);
+    // Hash the input password with SHA-256 before comparison
+    $hashed_password = hash('sha256', $password);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $aTitle[] = $row['title'];
-        $aDesc[] = (strlen($row['description']) > 250) ? substr($row['description'],0,250).'...' : $row['description'];
+    // Check if user exists
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+
+    if ($user && $user['password'] === $hashed_password) {
+        $_SESSION['usernickname'] = $username;
+        header('Location: index.php');
+        exit;
+    } else {
+        echo "Invalid username or password!";
     }
 }
 ?>
@@ -21,7 +30,7 @@ if ($result->num_rows > 0) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Homepage</title>
+        <title>Login</title>
 
         <link href="css/output.css" rel="stylesheet">
         <link href="css/fonts.css" rel="stylesheet">
@@ -39,10 +48,10 @@ if ($result->num_rows > 0) {
                     <h1 class="text-3xl text-center">Welcome!</h1>
 
                     <h2 class="text-2xl mt-7">Username:</h2>
-                    <input placeholder="Enter username..." type="text" class="text-lg my-4 p-2 rounded-xl bg-slate-600 placeholder-gray-400 focus:border-none" required>
+                    <input placeholder="Enter username..." name="uname" type="text" class="text-lg my-4 p-2 rounded-xl bg-slate-600 placeholder-gray-400 focus:border-none" required>
 
                     <h2 class="text-2xl">Password:</h2>
-                    <input placeholder="Enter password..." type="password" class="text-lg my-4 p-2 rounded-xl bg-slate-600 placeholder-gray-400 focus:border-none" required>
+                    <input placeholder="Enter password..." name="pass" type="password" class="text-lg my-4 p-2 rounded-xl bg-slate-600 placeholder-gray-400 focus:border-none" required>
                     <p class="text-gray-400">Forgot password? <a href="#" class="text-cyan-500 underline hover:text-cyan-300">Click here</a></p>
 
                     <button type="submit" class="text-xl px-2 py-3 text-center mt-5 rounded-xl uppercase border-2 border-white hover:bg-white hover:text-black transition-all ease-in-out">Login</button>

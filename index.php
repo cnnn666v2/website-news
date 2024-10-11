@@ -1,5 +1,6 @@
 <?php
-include('technicalphp/connect.php');
+session_start();
+require('technicalphp/db.php');
 
 $aTitle = [];
 $aDesc = [];
