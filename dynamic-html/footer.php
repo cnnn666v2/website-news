@@ -38,7 +38,7 @@
         <a class="bg-blue-700  p-2 uppercase hover:bg-blue-500 rounded-lg transition-all ease-in-out text-lg" href="#">Privacy Policy</a>
         <a class="bg-blue-700  p-2 uppercase hover:bg-blue-500 rounded-lg transition-all ease-in-out text-lg" href="#">Terms of Service</a>
 
-        <h5 id="footer-ver-txt" class="text-gray-400 rounded-lg p-2 text-sm ml-auto mt-auto">Version: 1.0</h5>
+        <h5 id="footer-ver-txt" class="text-gray-400 rounded-lg p-2 text-sm md:ml-auto mt-auto">Version: 1.0</h5>
     </div>
 
     <script type="text/javascript" src="./javascript/technical.js"></script>
