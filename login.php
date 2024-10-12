@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('technicalphp/db.php');
+require('/technicalphp/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['uname'];
@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user && $user['password'] === $hashed_password) {
         $_SESSION['usernickname'] = $username;
+        $_SESSION['userID'] = $user['id'];
         header('Location: index.php');
         exit;
     } else {
@@ -32,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <title>Login</title>
 
-        <link href="css/output.css" rel="stylesheet">
-        <link href="css/fonts.css" rel="stylesheet">
+        <link href="/css/output.css" rel="stylesheet">
+        <link href="/css/fonts.css" rel="stylesheet">
     </head>
 
     <body class="bg-slate-900">
-        <?php include('dynamic-html/mobilenavbar.php'); include('dynamic-html/navbar.php'); ?>
+        <?php include('/dynamic-html/mobilenavbar.php'); include('/dynamic-html/navbar.php'); ?>
 
         <main class="flex flex-col h-full flex-wrap md:flex-nowrap w-full">
             <div class="w-full flex justify-center my-3">
@@ -63,15 +64,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="flex flex-col mt-auto gap-2">
                         <p class="text-2xl uppercase">Wanna join us?</p>
-                        <a class="px-2 py-3 text-center uppercase hover:bg-white hover:text-black border-2 rounded-xl border-white text-xl transition-all ease-in-out" href="register.php">Register</a>
+                        <a class="px-2 py-3 text-center uppercase hover:bg-white hover:text-black border-2 rounded-xl border-white text-xl transition-all ease-in-out" href="/register.php">Register</a>
                     </div>
                 </div>
             </div>
         </main>
         
-        <?php include('dynamic-html/footer.php'); ?>
+        <?php include('/dynamic-html/footer.php'); ?>
 
-        <script type="text/javascript" src="javascript/hamburger.js"></script>
+        <script type="text/javascript" src="/javascript/hamburger.js"></script>
         <noscript>Please enable javascript for the website to function.</noscript>
     </body>
 </html>

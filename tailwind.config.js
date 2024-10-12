@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["*.{html,js,php}",
-    "dynamic-html/*.{php,js}"],
+    "dynamic-html/*.{php,js,html}",
+    "users/*.{php,js,html}"],
   theme: {
     extend: {
       zIndex: {

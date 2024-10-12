@@ -1,3 +1,16 @@
 /node_modules/
+/archive/
+/dashboard/
+/img/
+/portfolio-page-2/
+/portoflio-page/
+/szkola/
+/webalizer/
+/xampp/
+applications.html
+bitnami.css
+favicon.ico
+xampp.php
 package-lock.json
 package.json
+.gitignore
