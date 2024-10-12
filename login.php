@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user && $user['password'] === $hashed_password) {
         $_SESSION['usernickname'] = $username;
         $_SESSION['userID'] = $user['id'];
-        header('Location: index.php');
+        header('Location: /index.php');
         exit;
     } else {
         echo "Invalid username or password!";

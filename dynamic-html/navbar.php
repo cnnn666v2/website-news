@@ -7,7 +7,7 @@
         <a class="p-3 text-gray-300 hover:bg-slate-700 hover:text-white rounded-lg font-semibold text-lg transition-all ease-in-out" href="#">Games</a>
         <?php
         if(isset($_SESSION['usernickname'])) {
-            echo '<a class="p-3 hover:bg-white hover:text-black border-2 border-white font-semibold text-base transition-all ease-in-out ml-auto" href="users/profile.php?user=' . $_SESSION['userID'] . '">' . 'Welcome, ' . $_SESSION['usernickname'] . '</a>
+            echo '<a class="p-3 hover:bg-white hover:text-black border-2 border-white font-semibold text-base transition-all ease-in-out ml-auto" href="/users/profile.php?user=' . $_SESSION['userID'] . '">' . 'Welcome, ' . $_SESSION['usernickname'] . '</a>
             <a class="p-3 hover:bg-white hover:text-black border-2 border-white font-semibold text-base transition-all ease-in-out" href="/logout.php">Logout</a>';
         } else {
             echo '<a class="p-3 ml-auto hover:bg-white hover:text-black border-2 border-white font-semibold text-base transition-all ease-in-out" href="/login.php">Login</a>
