@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('/technicalphp/db.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['uname'];
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </head>
 
     <body class="bg-slate-900">
-        <?php include('/dynamic-html/mobilenavbar.php'); include('/dynamic-html/navbar.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/mobilenavbar.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/navbar.php'); ?>
 
         <main class="flex flex-col h-full flex-wrap md:flex-nowrap w-full">
             <div class="w-full flex justify-center my-3">
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </main>
         
-        <?php include('/dynamic-html/footer.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/footer.php'); ?>
 
         <script type="text/javascript" src="/javascript/hamburger.js"></script>
         <noscript>Please enable javascript for the website to function.</noscript>
