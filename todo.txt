@@ -1,0 +1,3 @@
+TO DO:
+[ ] Remake error logic:
+    - utilize variables instead of multiple functions for each error msg

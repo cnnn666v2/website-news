@@ -47,8 +47,8 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
             ?>
 
             <div class="flex flex-col p-5 m-5 gap-5">
-                <div class="flex flex-col md:flex-row gap-10 bg-slate-700 rounded-xl p-5">
-                    <img class="border-4 border-slate-800 rounded-lg basis-1/4 self-center md:self-start" src="https://picsum.photos/100" height="100px" width="100px"/>
+                <div class="flex flex-col lg:flex-row gap-10 bg-slate-700 rounded-xl p-5">
+                    <img class="border-4 border-slate-800 rounded-lg basis-1/4 self-center lg:self-start" src="https://picsum.photos/100" height="250px" width="250px"/>
                     <div class="flex flex-col gap-1 basis-3/4">
                         <div class="flex flex-col md:flex-row gap-3 md:gap-0">
                             <div class="flex flex-col gap-3 md:gap-0">
@@ -60,13 +60,14 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
                                 <h1 class="text-3xl">User XP: 500/1950</h1>
                             </div>
                         </div>
-                        <h1 class="text-3xl mt-auto">About <?php echo $username; ?>:</h1>
+                        <hr class="hidden md:block">
+                        <h1 class="text-3xl mt-3 md:mt-auto">About <?php echo $username; ?>:</h1>
                         <h1 class="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin viverra, ipsum mollis sodales mattis, libero elit accumsan turpis, eu dapibus nisl velit sed tellus. Praesent magna lectus, dapibus eget est nec, viverra interdum felis. Proin maximus erat sit amet metus sagittis congue. Sed nulla nisi, faucibus vitae eros ac, pellentesque tristique risus. Cras egestas tincidunt ornare. Nullam semper ornare lacus nec vestibulum. Praesent tempor eros sed pulvinar consectetur. Maecenas sit amet auctor lacus, ut hendrerit mauris. Vivamus posuere lectus sit amet nisi malesuada, ac euismod ipsum faucibus. Integer sodales laoreet orci [READ MORE]</h1>                       
                     </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row gap-3">
-                    <div class="flex-col bg-blue-900 basis-1/4 p-5 rounded-xl flex md:hidden">
+                <div class="flex flex-col gap-3 lg:flex-row-reverse">
+                    <div class="flex-col bg-blue-900 basis-1/4 p-5 rounded-xl flex">
                         <h1 class="text-3xl">Quick links:</h1>
                         <hr>
 
@@ -93,36 +94,12 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
                         <div class="bg-orange-800 text-white rounded-md border-l-cyan-500 border-l-4 p-3">
                             <h1 class="text-3xl">Feed title:</h1>
                             <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin viverra, ipsum mollis sodales mattis, libero elit accumsan turpis, eu dapibus nisl velit sed tellus. Praesent magna lectus, dapibus eget est nec, viverra interdum felis. Proin maximus erat sit amet metus sagittis congue. Sed nulla nisi, faucibus vitae eros ac, pellentesque tristique risus. Cras egestas tincidunt ornare. Nullam semper ornare lacus nec vestibulum. Praesent tempor eros sed pulvinar consectetur. Maecenas sit amet auctor lacus, ut hendrerit mauris. Vivamus posuere lectus sit amet nisi malesuada, ac euismod ipsum faucibus. Integer sodales laoreet orci, sed elementum diam varius vel. Mauris ac aliquam velit, sit amet fermentum tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi iaculis consequat elit in tempus. Fusce maximus dignissim maximus. </p>
-                            <div class="flex flex-row mt-3 justify-between md:justify-start gap-2 md:gap-5">
-                                <button class="group border-none text-white uppercase font-bold basis-1/3 md:basis-auto bg-orange-500 md:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl md:rounded-none transition-all ease-in-out py-2 md:py-0"><span class="material-symbols-outlined md:group-hover:bg-orange-500 rounded-full md:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_up</span><br class="hidden md:block"><span class="text-lg my-autor">250</span></button>
-                                <button class="group border-none text-white uppercase font-bold basis-1/3 md:basis-auto bg-orange-500 md:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl md:rounded-none transition-all ease-in-out"><span class="material-symbols-outlined md:group-hover:bg-orange-500 rounded-full md:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_down</span><br class="hidden md:block"><span class="text-lg my-autor">5.1k</span></button>
-                                <button class="group border-none text-white uppercase font-bold basis-1/3 md:basis-auto bg-orange-500 md:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl md:rounded-none transition-all ease-in-out"><span class="material-symbols-outlined md:group-hover:bg-orange-500 rounded-full md:p-1 transition-all ease-in-out text-3xl md:text-4xl">comment</span><br class="hidden md:block"><span class="text-lg my-autor">10</span></button>
+                            <div class="flex flex-row mt-3 justify-between lg:justify-start gap-2 lg:gap-5">
+                                <button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_up</span><br class="hidden md:block"><span class="text-lg my-autor">250</span></button>
+                                <button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_down</span><br class="hidden md:block"><span class="text-lg my-autor">5.1k</span></button>
+                                <button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">comment</span><br class="hidden md:block"><span class="text-lg my-autor">10</span></button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="flex-col bg-blue-900 basis-1/4 p-5 rounded-xl hidden md:flex">
-                        <h1 class="text-3xl">Quick links:</h1>
-                        <hr>
-
-                        <h2 class="text-2xl mt-2">Category 1:</h2>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <hr class="mt-2">
-
-                        <h2 class="text-2xl mt-1">Category 2:</h2>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <hr class="mt-2">
-                        
-                        <h2 class="text-2xl mt-1">Category 3:</h2>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-                        <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
-
-                        <a href="#top" class="text-center mt-auto text-lg uppercase hover:text-cyan-300 w-full">Back to top</a>
                     </div>
                 </div>
             </div>

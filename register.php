@@ -1,34 +1,33 @@
 <?php
 session_start();
-require('technicalphp/db.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/db.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/error-info.php');
 
+$error_msg = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if($_POST['cpass'] != $_POST['pass']) {
-        echo '<h1 style="color:white">Passwords do not match<?h1>';
-    } else {
-        $username = $_POST['uname'];
-        $password = hash('sha256', $_POST['pass']);
-    
-        // Check if username exists
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-        
-        if ($stmt->rowCount() > 0) {
-            echo "Username already taken!";
+    if(!isset($_SESSION['usernickname'])) {
+        if($_POST['cpass'] != $_POST['pass']) {
+            $error_msg = 'Passwords do not match';
         } else {
-            // Insert user into database
-            $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-            if ($stmt->execute([$username, $password])) {
-                header('Location: login.php');
-                exit;
+            $username = $_POST['uname'];
+            $password = hash('sha256', $_POST['pass']);
+        
+            // Check if username exists
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+            $stmt->execute([$username]);
+            
+            if ($stmt->rowCount() > 0) {
+                $error_msg = 'Username already taken!';
             } else {
-                echo '<div class="flex flex-col absolute bg-black bg-opacity-70 justify-center w-full h-full">
-                    <div class="flex flex-col rounded-xl bg-red-800 text-white gap-2 p-5 w-1/4 self-center mx-auto">
-                        <h1 class="text-2xl">An error has occured!</h1>
-                        <h1 class="text-2xl">Please try again later.</h1>
-                    </div>
-                </div>';
+                // Insert user into database
+                $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+                if ($stmt->execute([$username, $password])) {
+                    header('Location: login.php');
+                    exit;
+                } else {
+                    $error_msg = 'An error occured! Please try again later.';
+                }
             }
         }
     }
@@ -51,12 +50,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php include('dynamic-html/mobilenavbar.php'); include('dynamic-html/navbar.php'); ?>
 
         <main class="flex flex-col h-full flex-wrap md:flex-nowrap w-full">
+            <?php
+            if(isset($_SESSION['usernickname'])) {
+                E_LOGIN_LOGGED();
+            }
+            ?>
             <div class="w-full flex justify-center my-3">
                 <h1 class="text-white text-center w-1/2 text-3xl uppercase">I have 2 sides:</h1>
             </div>
             <div class="flex flex-row w-full justify-center p-10 pt-0">
                 <form method="POST" class="flex flex-col text-white bg-slate-800 m-5 p-5 basis-1/4 mr-0 rounded-l-xl mt-0">
                     <h1 class="text-3xl text-center">Join us!</h1>
+                    <p class="text-red-600 text-center font-semibold"><?php echo $error_msg ?></p>
 
                     <h2 class="text-2xl mt-7">Username:</h2>
                     <input placeholder="Enter username..." type="text" name="uname" class="text-lg my-4 p-2 rounded-xl bg-slate-600 placeholder-gray-400 focus:border-none" required>

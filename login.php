@@ -1,26 +1,31 @@
 <?php
 session_start();
 require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/db.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/error-info.php');
+
+$error_msg = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['uname'];
-    $password = $_POST['pass'];
+    if(!isset($_SESSION['usernickname'])) {
+        $username = $_POST['uname'];
+        $password = $_POST['pass'];
 
-    // Hash the input password with SHA-256 before comparison
-    $hashed_password = hash('sha256', $password);
+        // Hash the input password with SHA-256 before comparison
+        $hashed_password = hash('sha256', $password);
 
-    // Check if user exists
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch();
+        // Check if user exists
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
 
-    if ($user && $user['password'] === $hashed_password) {
-        $_SESSION['usernickname'] = $username;
-        $_SESSION['userID'] = $user['id'];
-        header('Location: /index.php');
-        exit;
-    } else {
-        echo "Invalid username or password!";
+        if ($user && $user['password'] === $hashed_password) {
+            $_SESSION['usernickname'] = $username;
+            $_SESSION['userID'] = $user['id'];
+            header('Location: /index.php');
+            exit;
+        } else {
+            $error_msg = '<p class="text-red-600 text-center font-semibold">Invalid username or password!</p>';
+        }
     }
 }
 ?>
@@ -41,12 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/mobilenavbar.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/navbar.php'); ?>
 
         <main class="flex flex-col h-full flex-wrap md:flex-nowrap w-full">
+            <?php
+            if(isset($_SESSION['usernickname'])) {
+                E_LOGIN_LOGGED();
+            }
+            ?>
             <div class="w-full flex justify-center my-3">
                 <h1 class="text-white text-center w-1/2 text-3xl uppercase">I have 2 sides:</h1>
             </div>
             <div class="flex flex-row w-full justify-center p-10 pt-0">
                 <form method="POST" class="flex flex-col text-white bg-slate-800 m-5 p-5 basis-1/4 mr-0 rounded-l-xl mt-0">
                     <h1 class="text-3xl text-center">Welcome!</h1>
+                    <?php echo $error_msg ?>
 
                     <h2 class="text-2xl mt-7">Username:</h2>
                     <input placeholder="Enter username..." name="uname" type="text" class="text-lg my-4 p-2 rounded-xl bg-slate-600 placeholder-gray-400 focus:border-none" required>
