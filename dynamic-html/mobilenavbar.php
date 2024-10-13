@@ -3,12 +3,22 @@
         <button class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full text-2xl"  onclick="showMobile()">X</button>
                 
         <div class="flex flex-row gap-5 text-center">
-            <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full basis-1/2" href="#">Login</a>
-            <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full basis-1/2" href="#">Register</a>
+        <?php if(isset($_SESSION['usernickname'])) {
+            echo '
+            <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full basis-1/2" href="/users/profile.php?user=' . $_SESSION['userID'] . '">Profile</a>
+            <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full basis-1/2" href="/logout.php">Logout</a>
+            ';
+        } else {
+            echo '
+            <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full basis-1/2" href="/login.php">Login</a>
+            <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full basis-1/2" href="/register.php">Register</a>
+            ';
+        }
+        ?>
         </div>
         <hr>
 
-        <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full" href="#">Homepage</a>
+        <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full" href="/index.php">Homepage</a>
         <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full" href="#">News</a>
         <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full" href="#">Blog</a>
         <a class="p-3 hover:bg-slate-500 hover:text-white rounded-lg font-semibold transition-all ease-in-out w-full" href="#">Games</a>
