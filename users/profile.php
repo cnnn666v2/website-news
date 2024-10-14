@@ -39,10 +39,10 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
                     $username = $user['username'];
                     S_PROFILE_FEED($username);
                 } else {
-                    E_PROFILE_NOUSER();
+                    E_PROFILE('User not found.<br> Are you sure it\'s the <span class="font-semibold">correct</span> id?');
                 }
             } else {
-                E_PROFILE_INVALIDID();
+                E_PROFILE('Provided invalid id.');
             }
             ?>
 
@@ -87,6 +87,8 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
                         <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
                         <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
                         <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
+
+                        <a href="#top" class="text-lg uppercase text-center text-white hover:text-cyan-300 w-full scroll-smooth mt-auto">Back to top</a>
                     </div>
 
                     <div class="flex flex-col bg-purple-950 basis-3/4 p-5 rounded-xl gap-5">
