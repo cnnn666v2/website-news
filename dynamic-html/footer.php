@@ -1,4 +1,6 @@
 <footer class="p-5 text-white bg-slate-800 flex flex-col gap-3 border-t-4 border-slate-400">
+    <script type="text/javascript" src="/javascript/technical.js"></script>
+
     <div class="flex flex-col md:flex-row w-full gap-3 text-center md:text-left justify-between lg:justify-start">
         <div class="basis-1/6 flex flex-col text-gray-500 gap-1">
             <h1 class="uppercase text-3xl md:text-2xl text-white">Contact:</h1>
@@ -40,6 +42,4 @@
 
         <h5 id="footer-ver-txt" class="text-gray-400 rounded-lg p-2 text-sm md:ml-auto mt-auto">Version: 1.0</h5>
     </div>
-
-    <script type="text/javascript" src="./javascript/technical.js"></script>
 </footer>

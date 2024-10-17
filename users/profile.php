@@ -2,7 +2,8 @@
 session_start();
 require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/db.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/error-info.php');
-require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/information.php');
+//require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +38,6 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
             
                 if ($user) {
                     $username = $user['username'];
-                    S_PROFILE_FEED($username);
                 } else {
                     E_PROFILE('User not found.<br> Are you sure it\'s the <span class="font-semibold">correct</span> id?');
                 }
@@ -53,22 +53,22 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
                         <div class="flex flex-col md:flex-row gap-3 md:gap-0">
                             <div class="flex flex-col gap-3 md:gap-0">
                                 <h1 class="text-3xl">Username: <?php echo $username; ?></h1>
-                                <h1 class="text-3xl">Lives in: <span class="text-xl">Poland, Warsaw</span></h1>
+                                <h1 class="text-3xl">Lives in: <span class="text-xl">[Country, city - to do]</span></h1>
                             </div>
                             <div class="flex flex-col md:ml-auto gap-3 md:gap-0">
-                                <h1 class="text-3xl">User level: 50</h1>
-                                <h1 class="text-3xl">User XP: 500/1950</h1>
+                                <h1 class="text-3xl">User level: 50 [to do]</h1>
+                                <h1 class="text-3xl">User XP: 500/1950 [to do]</h1>
                             </div>
                         </div>
                         <hr class="hidden md:block">
-                        <h1 class="text-3xl mt-3 md:mt-auto">About <?php echo $username; ?>:</h1>
+                        <h1 class="text-3xl mt-3 md:mt-auto">About <?php echo $username; ?>: [to do]</h1>
                         <h1 class="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin viverra, ipsum mollis sodales mattis, libero elit accumsan turpis, eu dapibus nisl velit sed tellus. Praesent magna lectus, dapibus eget est nec, viverra interdum felis. Proin maximus erat sit amet metus sagittis congue. Sed nulla nisi, faucibus vitae eros ac, pellentesque tristique risus. Cras egestas tincidunt ornare. Nullam semper ornare lacus nec vestibulum. Praesent tempor eros sed pulvinar consectetur. Maecenas sit amet auctor lacus, ut hendrerit mauris. Vivamus posuere lectus sit amet nisi malesuada, ac euismod ipsum faucibus. Integer sodales laoreet orci [READ MORE]</h1>                       
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-3 lg:flex-row-reverse">
                     <div class="flex-col bg-blue-900 basis-1/4 p-5 rounded-xl flex">
-                        <h1 class="text-3xl">Quick links:</h1>
+                        <h1 class="text-3xl">Quick links: [to do]</h1>
                         <hr>
 
                         <h2 class="text-2xl mt-2">Category 1:</h2>
@@ -93,15 +93,29 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
 
                     <div class="flex flex-col bg-purple-950 basis-3/4 p-5 rounded-xl gap-5">
                         <h1 class="text-3xl"><?php echo $username . '\'s feed:' ?></h1>
-                        <div class="bg-orange-800 text-white rounded-md border-l-cyan-500 border-l-4 p-3">
-                            <h1 class="text-3xl">Feed title:</h1>
-                            <p class="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin viverra, ipsum mollis sodales mattis, libero elit accumsan turpis, eu dapibus nisl velit sed tellus. Praesent magna lectus, dapibus eget est nec, viverra interdum felis. Proin maximus erat sit amet metus sagittis congue. Sed nulla nisi, faucibus vitae eros ac, pellentesque tristique risus. Cras egestas tincidunt ornare. Nullam semper ornare lacus nec vestibulum. Praesent tempor eros sed pulvinar consectetur. Maecenas sit amet auctor lacus, ut hendrerit mauris. Vivamus posuere lectus sit amet nisi malesuada, ac euismod ipsum faucibus. Integer sodales laoreet orci, sed elementum diam varius vel. Mauris ac aliquam velit, sit amet fermentum tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi iaculis consequat elit in tempus. Fusce maximus dignissim maximus. </p>
-                            <div class="flex flex-row mt-3 justify-between lg:justify-start gap-2 lg:gap-5">
-                                <button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_up</span><br class="hidden md:block"><span class="text-lg my-autor">250</span></button>
-                                <button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_down</span><br class="hidden md:block"><span class="text-lg my-autor">5.1k</span></button>
-                                <button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">comment</span><br class="hidden md:block"><span class="text-lg my-autor">10</span></button>
-                            </div>
-                        </div>
+                        <?php
+                        if (isset($username)) {
+                            $stmt = $pdo->prepare("SELECT * FROM user_posts WHERE author_id = :user_id");
+                            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+                            $stmt->execute();
+                            $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            
+                            if ($posts) {
+                                foreach ($posts as $post) {
+                                    echo '<div class="bg-orange-800 text-white rounded-md border-l-cyan-500 border-l-4 p-3">
+                                            <h1 class="text-3xl">'. htmlspecialchars($post['title'], ENT_QUOTES, "UTF-8") .':</h1>
+                                            <p class="text-xl">'. htmlspecialchars($post['content'], ENT_QUOTES, "UTF-8") .'</p>
+                                            <div class="flex flex-row mt-3 justify-between lg:justify-start gap-2 lg:gap-5">';
+                                    echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_up</span><br class="hidden md:block"><span class="text-lg my-autor">'. $post['likes'] .'</span></button>';
+                                    echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_down</span><br class="hidden md:block"><span class="text-lg my-autor">'. $post['dislikes'] .'</span></button>';
+                                    echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">comment</span><br class="hidden md:block"><span class="text-lg my-autor">'. '10' .'</span></button>';
+                                    echo '</div></div>';
+                                }
+                            } else {
+                                I_PROFILE("This user hasn't posted anything yet");
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
