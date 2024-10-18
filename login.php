@@ -21,6 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($user && $user['password'] === $hashed_password) {
             $_SESSION['usernickname'] = $username;
             $_SESSION['userID'] = $user['id'];
+
+            $stmt = $pdo->prepare("UPDATE users SET last_seen = CURRENT_TIMESTAMP WHERE id = :id");
+            $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                echo "Success";
+            } else {
+                echo "Failure";
+            }
+
             header('Location: /index.php');
             exit;
         } else {

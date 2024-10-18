@@ -4,6 +4,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/db.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/error-info.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/information.php');
 //require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
+$test = true;
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +39,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/information.php');
             
                 if ($user) {
                     $username = $user['username'];
+                    $last_seen = $user['last_seen'];
                 } else {
                     E_PROFILE('User not found.<br> Are you sure it\'s the <span class="font-semibold">correct</span> id?');
                 }
@@ -58,6 +60,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/information.php');
                             <div class="flex flex-col md:ml-auto gap-3 md:gap-0">
                                 <h1 class="text-3xl">User level: 50 [to do]</h1>
                                 <h1 class="text-3xl">User XP: 500/1950 [to do]</h1>
+                                <h1 class="text-3xl">Last seen on: <?php echo $last_seen ?></h1>
                             </div>
                         </div>
                         <hr class="hidden md:block">
@@ -102,15 +105,31 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/information.php');
                             
                             if ($posts) {
                                 foreach ($posts as $post) {
-                                    echo '<div class="bg-orange-800 text-white rounded-md border-l-cyan-500 border-l-4 p-3">
+                                    $check_stmt = $pdo->prepare("SELECT action FROM user_likes_dislikes WHERE user_id = :user_id AND feed_id = :feed_id");
+                                    $check_stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+                                    $check_stmt->bindParam(':feed_id', $post['id'], PDO::PARAM_INT);
+                                    $check_stmt->execute();
+                                    $user_liked = $check_stmt->fetchColumn() === 'like';
+                                    
+                                    $check_dislike_stmt = $pdo->prepare("SELECT action FROM user_likes_dislikes WHERE user_id = :user_id AND feed_id = :feed_id AND action = 'dislike'");
+                                    $check_dislike_stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+                                    $check_dislike_stmt->bindParam(':feed_id', $post['id'], PDO::PARAM_INT);
+                                    $check_dislike_stmt->execute();
+                                    $user_disliked = $check_dislike_stmt->fetchColumn() === 'dislike';
+
+                                    echo '<div class="bg-orange-800 text-white rounded-md border-l-cyan-500 border-l-4 p-3" id="post'. $post['id'] .'">
                                             <h1 class="text-3xl">'. htmlspecialchars($post['title'], ENT_QUOTES, "UTF-8") .':</h1>
                                             <p class="text-xl">'. htmlspecialchars($post['content'], ENT_QUOTES, "UTF-8") .'</p>
-                                            <div class="flex flex-row mt-3 justify-between lg:justify-start gap-2 lg:gap-5">';
-                                    echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_up</span><br class="hidden md:block"><span class="text-lg my-autor">'. $post['likes'] .'</span></button>';
-                                    echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_down</span><br class="hidden md:block"><span class="text-lg my-autor">'. $post['dislikes'] .'</span></button>';
+                                            <form class="flex flex-row mt-3 justify-between lg:justify-start gap-2 lg:gap-5" method="POST" action="/technicalphp/profile/like-post.php">';
+                                    echo '<input type="hidden" name="feed_id" value="'. $post['id'] .'">';
+                                    echo '<input type="hidden" name="author_feed_id" value="'. $userId .'">';
+                                    echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0" type="submit" name="action" value="like"><span style="color:#0BF;font-variation-settings: \'FILL\''. ($user_liked ? '1' : '0') .'" class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">thumb_up</span><br class="hidden md:block"><span class="text-lg my-autor">'. $post['likes'] .'</span></button>';
+                                    echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0" type="submit" name="action" value="dislike"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl" style="color:#F00;font-variation-settings: \'FILL\''. ($user_disliked ? '1' : '0') .'">thumb_down</span><br class="hidden md:block"><span class="text-lg my-autor">'. $post['dislikes'] .'</span></button>';
                                     echo '<button class="group border-none text-white uppercase font-bold basis-1/3 lg:basis-auto bg-orange-500 lg:hover:bg-transparent hover:bg-orange-600 md:bg-transparent rounded-xl lg:rounded-none transition-all ease-in-out py-2 lg:py-0"><span class="material-symbols-outlined lg:group-hover:bg-orange-500 rounded-full lg:p-1 transition-all ease-in-out text-3xl md:text-4xl">comment</span><br class="hidden md:block"><span class="text-lg my-autor">'. '10' .'</span></button>';
-                                    echo '<p class="ml-auto mt-auto text-sm font-semibold">Published on: '. $post['created_at'] .'</p>';
-                                    echo '</div></div>';
+                                    echo '<p class="hidden md:block ml-auto mt-auto text-sm font-semibold">Published on: '. $post['created_at'] .'</p>';
+                                    echo '</form>
+                                    <p class="md:hidden ml-auto mt-3 text-base font-semibold">Published on: '. $post['created_at'] .'</p>
+                                    </div>';
                                 }
                             } else {
                                 I_PROFILE("This user hasn't posted anything yet");
