@@ -98,7 +98,7 @@ $test = true;
                         <h1 class="text-3xl"><?php echo $username . '\'s feed:' ?></h1>
                         <?php
                         if (isset($username)) {
-                            $stmt = $pdo->prepare("SELECT * FROM user_posts WHERE author_id = :user_id");
+                            $stmt = $pdo->prepare("SELECT * FROM user_posts WHERE author_id = :user_id ORDER BY created_at DESC");
                             $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
                             $stmt->execute();
                             $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -3,7 +3,7 @@
     <div class="m-2 md:flex flex-row gap-4 text-lg uppercase content-center hidden w-full">
         <a class="p-3 text-gray-300 hover:bg-slate-700 hover:text-white rounded-lg font-semibold text-lg transition-all ease-in-out ml-4" href="/index.php">Homepage</a>
         <a class="p-3 text-gray-300 hover:bg-slate-700 hover:text-white rounded-lg font-semibold text-lg transition-all ease-in-out" href="#">News</a>
-        <a class="p-3 text-gray-300 hover:bg-slate-700 hover:text-white rounded-lg font-semibold text-lg transition-all ease-in-out" href="#">Blog</a>
+        <a class="p-3 text-gray-300 hover:bg-slate-700 hover:text-white rounded-lg font-semibold text-lg transition-all ease-in-out" href="#">Users</a>
         <a class="p-3 text-gray-300 hover:bg-slate-700 hover:text-white rounded-lg font-semibold text-lg transition-all ease-in-out" href="#">Games</a>
         <?php
         if(isset($_SESSION['usernickname'])) {
