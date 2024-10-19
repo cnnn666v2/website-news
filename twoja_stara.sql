@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2024 at 11:01 PM
+-- Generation Time: Oct 19, 2024 at 03:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,16 +61,72 @@ INSERT INTO `articles` (`id`, `title`, `description`, `author`, `created_at`) VA
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `last_seen` date NOT NULL DEFAULT current_timestamp(),
+  `status` enum('online','away','offline') DEFAULT 'offline'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(12, 'dozy', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
-(13, 'jajco', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3');
+INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `last_seen`, `status`) VALUES
+(12, 'dozy', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2024-10-17', '2024-10-19', 'online'),
+(13, 'jajco', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2024-10-17', '2024-10-19', 'online');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_likes_dislikes`
+--
+
+CREATE TABLE `user_likes_dislikes` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `feed_id` int(11) DEFAULT NULL,
+  `action` enum('like','dislike') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_likes_dislikes`
+--
+
+INSERT INTO `user_likes_dislikes` (`id`, `user_id`, `feed_id`, `action`) VALUES
+(22, 13, 3, 'like'),
+(26, 13, 1, 'like'),
+(29, 13, 2, 'like'),
+(35, 12, 4, 'like'),
+(38, 13, 4, 'like'),
+(39, 12, 2, 'like'),
+(41, 12, 3, 'like'),
+(42, 12, 1, 'like');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_posts`
+--
+
+CREATE TABLE `user_posts` (
+  `id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` varchar(500) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `likes` int(11) NOT NULL,
+  `dislikes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_posts`
+--
+
+INSERT INTO `user_posts` (`id`, `author_id`, `title`, `content`, `created_at`, `likes`, `dislikes`) VALUES
+(1, 13, 'Tytuł strony kurwa', 'Zabij <strong>siebie</strong>', '2024-10-17', 2, 0),
+(2, 13, '<strong> SQL INJECTION XDDD</strong>', '<?php\r\n                    if (isset($username)) {\r\n                        $stmt = $pdo->prepare(\"SELECT * FROM user_posts WHERE author_id = :user_id\");\r\n                        $stmt->bindParam(\':user_id\', $userId, PDO::PARAM_INT);\r\n                        $stmt->execute();\r\n                        $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);\r\n                        \r\n                        if ($posts) {\r\n                            foreach ($posts as $post) {\r\n                               ', '2024-10-17', 2, 0),
+(3, 13, 'Javascript', '<script>var jajco = document.getElementById(\"top\");\r\njajco.textContent = \"Jajco\";\r\n</script>', '2024-10-17', 2, 0),
+(4, 13, 'jajco exe', 'the story begins here', '2024-10-18', 2, 0);
 
 --
 -- Indexes for dumped tables
@@ -89,6 +145,19 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_likes_dislikes`
+--
+ALTER TABLE `user_likes_dislikes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`,`feed_id`);
+
+--
+-- Indexes for table `user_posts`
+--
+ALTER TABLE `user_posts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -103,6 +172,18 @@ ALTER TABLE `articles`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `user_likes_dislikes`
+--
+ALTER TABLE `user_likes_dislikes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `user_posts`
+--
+ALTER TABLE `user_posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
