@@ -41,5 +41,5 @@
         <h5 id="footer-ver-txt" class="text-gray-400 rounded-lg p-2 text-sm md:ml-auto mt-auto">Version:</h5>
     </div>
 
-    <script type="text/javascript" src="/javascript/technical.js"></script>
+    <script type="text/javascript" src="/javascript/info.js"></script>
 </footer>

@@ -4,7 +4,10 @@ require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/db.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/error-info.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/information.php');
 //require($_SERVER['DOCUMENT_ROOT'] . '/technicalphp/spawn-html.php');
-$test = true;
+
+if(isset($_SESSION['userID'])) {
+    $user_id = $_SESSION['userID'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +26,10 @@ $test = true;
 
     <body class="bg-slate-900">
         <span id="top" class="scroll-smooth"></span>
-        <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/mobilenavbar.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/navbar.php'); ?>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '/javascript/technical/user-activity.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/mobilenavbar.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/navbar.php'); ?>
 
         <main class="flex flex-row h-full flex-wrap md:flex-nowrap">
-            <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/sidebar.php'); ?>
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/sidebar.php');?>
             
             <div id="content" class="flex flex-col md:basis-10/12 text-white">
             <?php
@@ -40,6 +43,20 @@ $test = true;
                 if ($user) {
                     $username = $user['username'];
                     $last_seen = $user['last_seen'];
+                    switch($user['status']) {
+                        case 'online':
+                            $status_element = '<span class="text-green-400">'. $user['status'] . '</span>';
+                            break;
+                        case 'offline':
+                            $status_element = '<span class="text-red-400">'. $user['status'] . '</span>';
+                            break;
+                        case 'away':
+                            $status_element = '<span class="text-orange-400">'. $user['status'] . '</span>';
+                            break;
+                        default:
+                            $status_element = '<span class="text-red-400">'. $user['status'] . '</span>';
+                            break;
+                    }
                 } else {
                     E_PROFILE('User not found.<br> Are you sure it\'s the <span class="font-semibold">correct</span> id?');
                 }
@@ -56,6 +73,7 @@ $test = true;
                             <div class="flex flex-col gap-3 md:gap-0">
                                 <h1 class="text-3xl">Username: <?php echo $username; ?></h1>
                                 <h1 class="text-3xl">Lives in: <span class="text-xl">[Country, city - to do]</span></h1>
+                                <?php echo '<h1 class="text-3xl mt-auto">Currently '. $status_element .'</h1>' ?>
                             </div>
                             <div class="flex flex-col md:ml-auto gap-3 md:gap-0">
                                 <h1 class="text-3xl">User level: 50 [to do]</h1>
@@ -106,13 +124,13 @@ $test = true;
                             if ($posts) {
                                 foreach ($posts as $post) {
                                     $check_stmt = $pdo->prepare("SELECT action FROM user_likes_dislikes WHERE user_id = :user_id AND feed_id = :feed_id");
-                                    $check_stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+                                    $check_stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
                                     $check_stmt->bindParam(':feed_id', $post['id'], PDO::PARAM_INT);
                                     $check_stmt->execute();
                                     $user_liked = $check_stmt->fetchColumn() === 'like';
                                     
                                     $check_dislike_stmt = $pdo->prepare("SELECT action FROM user_likes_dislikes WHERE user_id = :user_id AND feed_id = :feed_id AND action = 'dislike'");
-                                    $check_dislike_stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+                                    $check_dislike_stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
                                     $check_dislike_stmt->bindParam(':feed_id', $post['id'], PDO::PARAM_INT);
                                     $check_dislike_stmt->execute();
                                     $user_disliked = $check_dislike_stmt->fetchColumn() === 'dislike';
