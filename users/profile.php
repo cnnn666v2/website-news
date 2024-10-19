@@ -25,7 +25,7 @@ if(isset($_SESSION['userID'])) {
     </head>
 
     <body class="bg-slate-900">
-        <span id="top" class="scroll-smooth"></span>
+        <span id="top"></span>
         <?php include($_SERVER['DOCUMENT_ROOT'] . '/javascript/technical/user-activity.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/mobilenavbar.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/navbar.php'); ?>
 
         <main class="flex flex-row h-full flex-wrap md:flex-nowrap">
@@ -109,14 +109,27 @@ if(isset($_SESSION['userID'])) {
                         <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
                         <a href="#" class="text-lg uppercase underline text-cyan-500 hover:text-cyan-300 w-full">Link</a>
 
-                        <a href="#top" class="text-lg uppercase text-center text-white hover:text-cyan-300 w-full scroll-smooth mt-auto">Back to top</a>
+                        <a href="#top" class="text-lg uppercase text-center text-white hover:text-cyan-300 w-full mt-auto">Back to top</a>
                     </div>
 
                     <div class="flex flex-col bg-purple-950 basis-3/4 p-5 rounded-xl gap-5">
                         <h1 class="text-3xl"><?php echo $username . '\'s feed:' ?></h1>
                         <?php
+                        if(isset($user_id)) {
+                            if($user_id == $user['id']) {
+                                echo '<form id="create-user-post-form" method="POST" class="flex flex-col gap-4">';
+                                echo '<label class="text-2xl">What\'s on your mind today?</label>';
+                                echo '<input type="text" id="feed-title" name="feed-title" placeholder="It all started with..." class="text-black text-xl p-2 border-none rounded-xl" required>';
+                                echo '<textarea id="feed-input" name="feed-input" rows="5" placeholder="I\'m feeling..." class="text-black text-xl p-2 border-none rounded-xl" required></textarea>';
+                                echo '<button type="submit" class="text-xl uppercase bg-blue-600 py-4 w-full md:w-32 rounded-lg hover:bg-blue-400 transition-all ease-in-out">Publish!</button>';
+                                echo '</form>';
+                                echo '<script type="text/javascript" src="/javascript/technical/create-post.js"></script>';
+                            }
+                        }
+
+
                         if (isset($username)) {
-                            $stmt = $pdo->prepare("SELECT * FROM user_posts WHERE author_id = :user_id ORDER BY created_at DESC");
+                            $stmt = $pdo->prepare("SELECT * FROM user_posts WHERE author_id = :user_id ORDER BY id DESC LIMIT 10");
                             $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
                             $stmt->execute();
                             $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);

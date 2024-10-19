@@ -11,9 +11,12 @@ if(isset($_SESSION['userID'])) {
             $stmt = $pdo->prepare("UPDATE users SET status = :status WHERE id = :user_id");
             $stmt->bindParam(':status', $status, PDO::PARAM_STR);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $stmt->execute();
         
-            echo "Status updated to " . $status;
+            if ($stmt->execute()) {
+                echo json_encode(['status' => 'success', 'message' => 'Status changed to: '. $status]);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update the status.']);
+            }
         } else { echo 'Error occured! 3'; exit; }
     } else { echo 'Error occured! 2'; exit; }
 } else { echo 'Error occured 1!'; exit; }

@@ -3,6 +3,10 @@ const awayTimeout = 300000;
 let activityTimer;
 var userID = <?php echo json_encode($_SESSION['userID']); ?>
 
+document.addEventListener("DOMContentLoaded", function() {
+    setOnlineStatus();
+});
+
 function setAwayStatus() {
     fetch('/api/v1/users/update-status.php', {
         method: 'POST',
@@ -11,7 +15,7 @@ function setAwayStatus() {
     })
     .then(response => response.text())
     .then(data => {
-        console.log('User is now away:', data);
+        console.log('User:', data);
     })
     .catch(error => {
         console.error('Error setting status to away:', error);
@@ -26,7 +30,7 @@ function setOnlineStatus() {
     })
     .then(response => response.text())
     .then(data => {
-        console.log('User is now away:', data);
+        console.log('User:', data);
     })
     .catch(error => {
         console.error('Error setting status to away:', error);
@@ -35,7 +39,6 @@ function setOnlineStatus() {
 
 function resetActivityTimer() {
     clearTimeout(activityTimer);
-    setOnlineStatus();
     activityTimer = setTimeout(setAwayStatus, awayTimeout);
 }
 

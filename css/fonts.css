@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .stroke-text {
   -webkit-text-stroke: 2px;
   -webkit-text-stroke-color: black;
