@@ -1368,6 +1368,10 @@ video {
     background-color: transparent;
   }
 
+  .md\:p-5 {
+    padding: 1.25rem;
+  }
+
   .md\:py-1 {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;

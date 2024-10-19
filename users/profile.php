@@ -65,7 +65,7 @@ if(isset($_SESSION['userID'])) {
             }
             ?>
 
-            <div class="flex flex-col p-5 m-1 md:m-5 gap-5">
+            <div class="flex flex-col md:p-5 m-1 md:m-5 gap-5">
                 <div class="flex flex-col lg:flex-row gap-10 bg-slate-700 rounded-xl p-5">
                     <img class="border-4 border-slate-800 rounded-lg basis-1/4 self-center lg:self-start" src="https://picsum.photos/100" height="250px" width="250px"/>
                     <div class="flex flex-col gap-1 basis-3/4">
@@ -112,7 +112,7 @@ if(isset($_SESSION['userID'])) {
                         <a href="#top" class="text-lg uppercase text-center text-white hover:text-cyan-300 w-full mt-auto">Back to top</a>
                     </div>
 
-                    <div class="flex flex-col bg-purple-950 basis-3/4 p-5 rounded-xl gap-5">
+                    <div class="flex flex-col bg-purple-950 basis-3/4 p-2 md:p-5 rounded-xl gap-5">
                         <h1 class="text-3xl"><?php echo $username . '\'s feed:' ?></h1>
                         <?php
                         if(isset($user_id)) {
