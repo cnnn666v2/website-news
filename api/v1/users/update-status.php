@@ -11,6 +11,9 @@ if(isset($_SESSION['userID'])) {
             $stmt = $pdo->prepare("UPDATE users SET status = :status WHERE id = :user_id");
             $stmt->bindParam(':status', $status, PDO::PARAM_STR);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+            $stmt = $pdo->prepare("UPDATE users SET last_seen = CURRENT_TIMESTAMP WHERE id = :user_id");
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         
             if ($stmt->execute()) {
                 echo json_encode(['status' => 'success', 'message' => 'Status changed to: '. $status]);

@@ -6,7 +6,7 @@ if(isset($_SESSION['userID'])) {
     $pauthor = $_SESSION['userID'];
     $ptitle = $_POST['feed-title'];
     $pcontent = $_POST['feed-input'];
-    $pcurrdate = date("d-m-Y");
+    //$pcurrdate = date("d-m-Y");
 
     $stmt = $pdo->prepare("INSERT INTO user_posts (author_id, title, content, created_at, likes, dislikes) VALUES (:author_id, :title, :content, CURRENT_TIMESTAMP, 0, 0)");
     $stmt->bindParam(':author_id', $pauthor, PDO::PARAM_INT);

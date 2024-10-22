@@ -11,6 +11,7 @@ form.addEventListener('submit', async event => {
       body: data,
   })
   .then(function(response) {
+      window.location.reload()
       return response.text();
   })
   .then(function(body) {
