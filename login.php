@@ -22,17 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['usernickname'] = $username;
             $_SESSION['userID'] = $user['id'];
 
-            $stmt = $pdo->prepare("UPDATE users SET last_seen = CURRENT_TIMESTAMP WHERE id = :id");
-            $stmt->bindParam(':id', $user['id'], PDO::PARAM_INT);
-            $stmt->execute();
-
-            if ($stmt->execute()) {
-                echo "Success 1";
-            } else {
-                echo "Failure 1";
-            }
-
-            $stmt = $pdo->prepare("UPDATE users SET status = 'online' WHERE id = :id");
+            $stmt = $pdo->prepare("UPDATE users SET status = 'online', last_seen = CURRENT_TIMESTAMP WHERE id = :id");
             $stmt->bindParam(':id', $user['id'], PDO::PARAM_INT);
             $stmt->execute();
 

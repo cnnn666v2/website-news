@@ -8,11 +8,8 @@ if(isset($_SESSION['userID'])) {
             $user_id = $_POST['user_id'];
             $status = $_POST['status'];
         
-            $stmt = $pdo->prepare("UPDATE users SET status = :status WHERE id = :user_id");
+            $stmt = $pdo->prepare("UPDATE users SET status = :status, last_seen = CURRENT_TIMESTAMP WHERE id = :user_id");
             $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-
-            $stmt = $pdo->prepare("UPDATE users SET last_seen = CURRENT_TIMESTAMP WHERE id = :user_id");
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         
             if ($stmt->execute()) {
