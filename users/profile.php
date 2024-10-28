@@ -150,8 +150,13 @@ if(isset($_SESSION['userID'])) {
                                     $prevPage = $currPage-1;
                                     if(($currPage+1) > $totalpages) {$nextPage = 1;} else {$nextPage = $currPage+1;}
                                     echo '<p class="text-xl">Page: <a class="text-cyan-400 hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $prevPage .'><-</a> | ';
+                                    // I know there's a better way to do this but idc right now
                                     for ($i = 1;$i<=$totalpages;$i++) {
-                                        echo '<a class="text-cyan-400 underline hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $i .'>'. $i .'</a> | ';
+                                        if($i == $currPage) {
+                                            echo '<a class="text-green-600 underline hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $i .'>'. $i .'</a> | ';
+                                        } else {
+                                            echo '<a class="text-cyan-400 underline hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $i .'>'. $i .'</a> | ';
+                                        }
                                     }
                                     echo '<a class="text-cyan-400 hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $nextPage .'>-></a> </p>';
                                 }
@@ -190,8 +195,13 @@ if(isset($_SESSION['userID'])) {
                                         $prevPage = $currPage-1;
                                         if(($currPage+1) > $totalpages) {$nextPage = 1;} else {$nextPage = $currPage+1;}
                                         echo '<p class="text-xl">Page: <a class="text-cyan-400 hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $prevPage .'><-</a> | ';
+                                        // I know there's a better way to do this but idc right now
                                         for ($i = 1;$i<=$totalpages;$i++) {
-                                            echo '<a class="text-cyan-400 underline hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $i .'>'. $i .'</a> | ';
+                                            if($i == $currPage) {
+                                                echo '<a class="text-green-600 underline hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $i .'>'. $i .'</a> | ';
+                                            } else {
+                                                echo '<a class="text-cyan-400 underline hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $i .'>'. $i .'</a> | ';
+                                            }
                                         }
                                         echo '<a class="text-cyan-400 hover:text-cyan-600" href=/users/profile.php?user='.$userId.'&page='. $nextPage .'>-></a> </p>';
                                     }
