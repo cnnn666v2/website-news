@@ -18,7 +18,7 @@ if(isset($_SESSION['userID'])) {
 
         <title>Homepage</title>
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=comment,thumb_down,thumb_up" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=settings,thumb_down,thumb_up" />
         
         <link href="/css/output.css" rel="stylesheet">
         <link href="/css/fonts.css" rel="stylesheet">
@@ -75,7 +75,8 @@ if(isset($_SESSION['userID'])) {
                                     <h1 class="text-3xl">Lives in: <span class="text-xl">[Country, city - to do]</span></h1>
                                     <?php echo '<h1 class="text-3xl mt-auto">Currently '. $status_element .'</h1>' ?>
                                 </div>
-                                <div class="flex flex-col md:ml-auto gap-3 md:gap-0">
+                                <div class="flex flex-col md:ml-auto gap-3 md:gap-0 text-right">
+                                    <?php if($_SESSION['userID'] == $userId) { echo '<button class="w-fit self-end" onclick="user_settings()"><span class="material-symbols-outlined text-3xl">settings</span></button>'; }?>
                                     <h1 class="text-3xl">User level: 50 [to do]</h1>
                                     <h1 class="text-3xl">User XP: 500/1950 [to do]</h1>
                                     <h1 class="text-3xl">Last seen on: <?php echo $last_seen ?></h1>
