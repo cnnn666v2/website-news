@@ -29,6 +29,80 @@ if(isset($_SESSION['userID'])) {
         <?php include($_SERVER['DOCUMENT_ROOT'] . '/javascript/technical/user-activity.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/mobilenavbar.php'); include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/navbar.php'); ?>
 
         <main class="flex flex-row h-full flex-wrap md:flex-nowrap">
+            <div id="modalSettings" class="fixed hidden w-full h-full bg-black bg-opacity-80 z-999 text-white">
+                <div style="max-height:86vh;" class="bg-slate-600 p-4 rounded-lg text-left w-full mx-16 my-6 h-fit overflow-y-scroll">
+                    <button class="cursor-pointer text-xl border-2 border-solid border-red-600 p-2 uppercase rounded-lg hover:bg-red-600 transition-all ease-in-out" id="killBtn">Close</button>
+                    <h1 class="text-3xl mt-3">Account Settings:</h1>
+                    <form class="flex flex-col gap-3 mt-5" method="POST">
+                        <label for="aboutMe" class="text-2xl">About me:</label>
+                        <textarea class="w-full p-2 rounded-lg bg-slate-800 text-lg min-h-36" name="aboutMe" placeholder="Hello, I'm..."></textarea>
+                        <div class="flex-row"> 
+                            <label for="countryDrop" class="text-2xl">Country:</label>
+                            <select name="countryDrop" class="w-fit p-2 text-lg bg-slate-800 rounded-lg ml-2">
+                                <option value="Poland">Poland</option>
+                                <option value="Ukraine">Ukraine</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Czechia">Czechia</option>
+                                <option value="Slovakia">Slovakia</option>
+                                <option value="Hungary">Hungary</option>
+                                <option value="Fr*nce">Fr*nce</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Spain">Spain</option>
+                            </select>
+                        </div>
+                        <div class="flex-row"> 
+                            <label for="cityDrop" class="text-2xl">City:</label>
+                            <select name="cityDrop" class="w-fit p-2 text-lg bg-slate-800 rounded-lg ml-2">
+                                <optgroup label="Poland">
+                                    <option value="Warsaw">Warsaw</option>
+                                    <option value="Kracov">Kracov</option>
+                                </optgroup>
+                                <optgroup label="Ukraine">
+                                    <option value="Kyiv">Kyiv</option>
+                                    <option value="Mauriopol">Mauriopol</option>
+                                </optgroup>
+                                <optgroup label="Germany">
+                                    <option value="Berlin">Berlin</option>
+                                    <option value="Munich">Munich</option>
+                                </optgroup>
+                                <optgroup label="Czechia">
+                                    <option value="Prague">Prague</option>
+                                </optgroup>
+                                <optgroup label="Slovakia">
+                                </optgroup>
+                                <optgroup label="Hungary">
+                                </optgroup>
+                                <optgroup label="Fr*nce">
+                                    <option value="Paris">Paris</option>
+                                </optgroup>
+                                <optgroup label="United Kingdom">
+                                    <option value="London">London</option>
+                                </optgroup>
+                                <optgroup label="Spain">
+                                    <option value="Madrid">Madrid</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <label class="text-3xl mt-3">Quick Links:</label>
+                        <label class="text-2xl">Social media:</label>
+                        <input name="fb" type="text" placeholder="Facebook link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="ig" type="text" placeholder="Instagram link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="yt" type="text" placeholder="YouTube link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="twt" type="text" placeholder="Twitter link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="bsk" type="text" placeholder="Bluesky link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <label class="text-2xl">Games:</label>
+                        <input name="dc" type="text" placeholder="Discord Server link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="dct" type="text" placeholder="Discord Tag..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="st" type="text" placeholder="Steam profile link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <label class="text-2xl">Favourite websites:</label>
+                        <input name="w1" type="text" placeholder="Website link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="w2" type="text" placeholder="Website link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <input name="w3" type="text" placeholder="Website link..." style="max-width: 36%;" class="w-full p-2 text-lg bg-slate-800 rounded-lg" />
+                        <button class="cursor-pointer text-xl border-none p-2 uppercase rounded-lg bg-purple-700 hover:bg-purple-800 transition-all ease-in-out" id="killBtn">Submit</button>
+                    </form>
+                </div>
+            </div>
+
             <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/sidebar.php');?>
             
             <div id="content" class="flex flex-col md:basis-10/12 text-white">
@@ -76,7 +150,7 @@ if(isset($_SESSION['userID'])) {
                                     <?php echo '<h1 class="text-3xl mt-auto">Currently '. $status_element .'</h1>' ?>
                                 </div>
                                 <div class="flex flex-col md:ml-auto gap-3 md:gap-0 text-right">
-                                    <?php if($_SESSION['userID'] == $userId) { echo '<button class="w-fit self-end" onclick="user_settings()"><span class="material-symbols-outlined text-3xl">settings</span></button>'; }?>
+                                    <?php if($_SESSION['userID'] == $userId) { echo '<button class="w-fit self-end" id="openSetting"><span class="material-symbols-outlined text-3xl">settings</span></button>'; }?>
                                     <h1 class="text-3xl">User level: 50 [to do]</h1>
                                     <h1 class="text-3xl">User XP: 500/1950 [to do]</h1>
                                     <h1 class="text-3xl">Last seen on: <?php echo $last_seen ?></h1>
@@ -220,6 +294,7 @@ if(isset($_SESSION['userID'])) {
         <?php include($_SERVER['DOCUMENT_ROOT'] . '/dynamic-html/footer.php'); ?>
 
         <script type="text/javascript" src="/javascript/hamburger.js"></script>
+        <script type="text/javascript" src="/javascript/u_settings.js"></script>
         <noscript>Please enable javascript for the website to function.</noscript>
     </body>
 </html>
